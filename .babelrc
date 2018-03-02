@@ -1,0 +1,20 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "id": 9,
+          "uglify": true
+        },
+        "useBuiltIns": false,
+        "modules": false
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  }
+}
