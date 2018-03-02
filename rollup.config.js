@@ -74,7 +74,6 @@ if (process.env.NODE_ENV === 'development') {
       },
     })
   ]
-  umd.output.file = umd.output.file.replace(/js$/, 'min.js');
   umd.plugins = umd.plugins.concat(prodPlugins);
 }
 

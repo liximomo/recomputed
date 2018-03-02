@@ -1,13 +1,12 @@
 {
   "name": "recomputed",
-  "version": "1.0.1",
+  "version": "1.0.1-alpha",
   "main": "lib/recomputed.js",
+  "jsnext:main": "es/recomputed.js",
   "module": "es/recomputed.js",
   "browser": "dist/recomputed.js",
   "author": "liximoom",
   "license": "MIT",
-  "jsnext:main": "es/index.js",
-  "typings": "lib/index.d.ts",
   "files": [
     "lib",
     "es",
