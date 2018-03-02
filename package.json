@@ -1,11 +1,18 @@
 {
   "name": "recomputed",
-  "version": "1.0.0",
-  "main": "dist/recomputed.cjs.js",
-  "module": "dist/recomputed.esm.js",
-  "browser": "dist/recomputed.umd.js",
+  "version": "1.0.1",
+  "main": "lib/recomputed.js",
+  "module": "es/recomputed.js",
+  "browser": "dist/recomputed.js",
   "author": "liximoom",
   "license": "MIT",
+  "jsnext:main": "es/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es",
+    "dist"
+  ],
   "scripts": {
     "start": "npm-run-all --parallel watch:*",
     "watch:js": "NODE_ENV=development rollup -c -w",

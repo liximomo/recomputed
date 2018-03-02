@@ -5,7 +5,7 @@ import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
-const input = 'src/main.js';
+const input = 'src/index.js';
 
 const onwarn = function(warning) {
   // Skip certain warnings
@@ -50,6 +50,7 @@ const jsmodule = {
   output: [{ file: pkg.main, format: 'cjs' }, { file: pkg.module, format: 'es' }],
   onwarn,
   plugins,
+  external: ['reselect'],
 }
 
 if (process.env.NODE_ENV === 'development') {
