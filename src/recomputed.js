@@ -8,7 +8,7 @@ function createComputedCreater() {
   return (instance, ...args) => {
     const selector = createSelector(...args);
 
-    const computed = () => selector(...defaultPicker(instance), instance);
+    const computed = (overided = instance) => selector(...defaultPicker(overided), overided);
 
     return computed;
   };
