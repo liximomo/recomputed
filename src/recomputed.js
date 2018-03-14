@@ -1,21 +1,26 @@
-import { createSelector } from 'reselect';
+import createSelector from './selector';
 
 function defaultPicker(object) {
   return [object.props, object.state];
 }
 
-function createComputedCreater() {
+function computedCreater(picker) {
   return (instance, ...args) => {
     const selector = createSelector(...args);
 
-    const computed = (overrided = instance) => selector(...defaultPicker(overrided), overrided);
+    let computed;
+    if (picker) {
+      computed = (overrided = instance) => selector(...picker(overrided), overrided);
+    } else {
+      computed = (overrided = instance) => selector(overrided);
+    }
 
     return computed;
   };
 }
 
-const recomputed = createComputedCreater(defaultPicker);
+const recomputed = computedCreater(defaultPicker);
 
 export default recomputed;
 
-export { createComputedCreater };
+export { computedCreater };

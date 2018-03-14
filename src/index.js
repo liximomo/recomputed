@@ -1,7 +1,7 @@
-import recomputed, { createComputedCreater } from './recomputed';
+import recomputed, { computedCreater } from './recomputed';
 
 export default recomputed;
 
 export {
-  createComputedCreater,
+  computedCreater,
 };

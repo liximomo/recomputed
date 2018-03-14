@@ -14,7 +14,7 @@ describe('recomputed', () => {
     };
   });
 
-  test('basic recomputed', () => {
+  test('basic recomputed 1', () => {
     const getWrappedData = recomputed(
       mockRectInstance,
       props => {
@@ -46,6 +46,36 @@ describe('recomputed', () => {
     const changed = getWrappedData();
     expect(changed).not.toBe(previous);
     expect(changed).toEqual([{ id: 0, data: 2 }, { id: 1, data: 3 }]);
+  });
+
+  test('basic recomputed 2', () => {
+    const getWrappedData = recomputed(
+      mockRectInstance,
+      props => {
+        return props.list;
+      },
+      (props, state) => {
+        return state.start;
+      },
+      (props, state) => {
+        return state.end;
+      },
+      (list, start, end) => {
+        return list.slice(start, end).map((item, index) => ({
+          id: index,
+          data: item,
+        }));
+      }
+    );
+
+    const previous = getWrappedData();
+    expect(previous).toBe(getWrappedData());
+
+    mockRectInstance.props.list = [11, 22, 33, 44]
+
+    const changed = getWrappedData();
+    expect(changed).not.toBe(previous);
+    expect(changed).toEqual([{ id: 0, data: 11 }, { id: 1, data: 22 }]);
   });
 
   test('overide default object', () => {

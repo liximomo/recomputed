@@ -1,6 +1,6 @@
 # Recomputed
 
-Simple "computed" for React based on [reselect](https://github.com/reactjs/reselect).
+Simple "computed" for React inspired by [reselect](https://github.com/reactjs/reselect).
 
 ```js
 import recomputed from 'recomputed';
