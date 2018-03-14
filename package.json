@@ -6,6 +6,15 @@
   "module": "es/recomputed.js",
   "browser": "dist/recomputed.js",
   "author": "liximoom",
+  "homepage": "https://github.com/liximomo/recomputed/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:liximomo/recomputed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liximomo/recomputed/issues",
+    "email": "liximomo@gmail.com"
+  },
   "license": "MIT",
   "files": [
     "lib",
