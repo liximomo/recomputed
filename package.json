@@ -1,6 +1,6 @@
 {
   "name": "recomputed",
-  "version": "1.0.1-alpha.3",
+  "version": "1.0.1-alpha.4",
   "main": "lib/recomputed.js",
   "jsnext:main": "es/recomputed.js",
   "module": "es/recomputed.js",
@@ -24,7 +24,7 @@
   "scripts": {
     "start": "npm-run-all --parallel watch:*",
     "watch:js": "NODE_ENV=development rollup -c -w",
-    "prebuild": "npm run lint",
+    "prebuild": "npm run lint && npm run test",
     "build": "npm run build:js",
     "build:js": "NODE_ENV=production rollup -c",
     "lint": "eslint src/**/*.js",
