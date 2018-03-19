@@ -1,7 +1,16 @@
-import recomputed, { computedCreater } from './recomputed';
+import recomputed from './api/recomputed';
+import property from './api/property';
+import { props, state } from './api/react-binding';
+import shallow from './api/shallow';
+import deep from './api/deep';
 
 export default recomputed;
 
 export {
-  computedCreater,
+  property,
+  props,
+  state,
+
+  shallow,
+  deep,
 };
