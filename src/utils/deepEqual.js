@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-export function deepEqual(a, b) {
+export default function deepEqual(a, b) {
   return eq(a, b);
 }
 

@@ -7,7 +7,10 @@ export default function recomputed(instance) {
 
     const computed = (context = instance) => computable.value(context);
 
-    computed.getComputationCount = () => computable.getComputationCount();
+    if (process.env.NODE_ENV === 'test') {
+      computed.getComputationCount = () => computable.getComputationCount();
+    }
+
     return computed;
   };
 }

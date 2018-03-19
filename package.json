@@ -28,7 +28,7 @@
     "build": "npm run build:js",
     "build:js": "NODE_ENV=production rollup -c",
     "lint": "eslint src/**/*.js",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

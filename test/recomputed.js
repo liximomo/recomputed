@@ -174,29 +174,33 @@ describe('decorator', () => {
     expect(selectedItem.getComputationCount()).toEqual(count);
   });
 
-  test('should memorized by shallow (should not cached)', () => {
-    const selectedItem = composer(
+  test('should not memorized by shallow but memorized by deep', () => {
+    const shallowSelectedItem = composer(
       shallow(property('list')),
       state('selectedId'),
       (list, selectedId) => {
         return list.find(item => item.id === selectedId).data;
       }
     );
-    const previous = selectedItem();
-    expect(previous).toEqual({ nested: 2 });
+    const deepSelectedItem = composer(
+      deep(property('list')),
+      state('selectedId'),
+      (list, selectedId) => {
+        return list.find(item => item.id === selectedId).data;
+      }
+    );
+    const shallowPrevious = shallowSelectedItem();
+    const deepPrevious = deepSelectedItem();
+    expect(shallowPrevious).toEqual({ nested: 2 });
+    expect(deepPrevious).toEqual({ nested: 2 });
 
-    const count = selectedItem.getComputationCount();
+    const shallowCount = shallowSelectedItem.getComputationCount();
+    const deepCount = deepSelectedItem.getComputationCount();
     mockRectInstance.list = mockRectInstance.list.slice();
     mockRectInstance.list[0] = { ...mockRectInstance.list[0] };
-    selectedItem();
-    expect(selectedItem.getComputationCount()).toEqual(count + 1);
-  });
-
-  test('should memorized by deep (should cached)', () => {
-    // todo
-  });
-
-  test('should memorized by deep (should not cached)', () => {
-    // todo
+    shallowSelectedItem();
+    deepSelectedItem();
+    expect(shallowSelectedItem.getComputationCount()).toEqual(shallowCount + 1);
+    expect(deepSelectedItem.getComputationCount()).toEqual(deepCount);
   });
 });
