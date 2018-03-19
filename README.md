@@ -3,7 +3,7 @@
 Simple "computed" for React inspired by [reselect](https://github.com/reactjs/reselect).
 
 ```js
-import recomputed, { property, props, state, shallow } from '../src/index';
+import recomputed, { property, props, state, shallow } from 'recomputed';
 
 class App extends React.Component {
   constructor(props) {
