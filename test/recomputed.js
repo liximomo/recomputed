@@ -17,7 +17,7 @@ describe('recomputed', () => {
 
     const composer = recomputed(mockRectInstance);
 
-    computedData = composer(props('list'), state('start'), state('end'), (list, start, end) => {
+    computedData = composer(props('list'), state('start'), state(instState => instState.end), (list, start, end) => {
       return list.slice(start, end).map((item, index) => ({
         id: index,
         data: item,

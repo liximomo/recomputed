@@ -1,23 +1,34 @@
 import memoize from './memoize';
 import InputInterface from './InputInterface';
 
-class Computable {
+class Computable extends InputInterface {
   static from(...inputs) {
     const resultFun = inputs.pop();
 
-    if (!inputs.every(input => input instanceof InputInterface)) {
-      const funcTypes = inputs.map(dep => typeof dep).join(', ');
-      throw new Error(
-        'Computable::from expect all input to be instance of Input, ' +
-          `instead received the following types: [${funcTypes}]`
-      );
-    }
+    const inputFuncs = [];
 
-    return new Computable(inputs, resultFun);
+    inputs.forEach(input => {
+      const type = typeof input;
+
+      if (input instanceof InputInterface) {
+        inputFuncs.push(input.value.bind(input));
+      } else if (type === 'function') {
+        inputFuncs.push(input);
+      } else {
+        throw new Error(
+          'Computable::from expect all input to be function or instance of Input' +
+            `instead received the following types: [${type}]`
+        );
+      }
+    });
+
+    return new Computable(inputFuncs, resultFun);
   }
 
-  constructor(inputs, resultFun) {
-    this._inputs = inputs;
+  constructor(inputFuncs, resultFun) {
+    super();
+
+    this._inputFuncs = inputFuncs;
     this._resultFun = resultFun;
     this._computationCount = 0;
 
@@ -44,15 +55,15 @@ class Computable {
   }
 
   value(context) {
-    const inputs = this._inputs;
+    const inputFuncs = this._inputFuncs;
     const resultFunc = this._memoizedCompute;
 
     const params = [];
-    const length = inputs.length;
+    const length = inputFuncs.length;
 
     for (let i = 0; i < length; i++) {
       // apply arguments instead of spreading and mutate a local list of params for performance.
-      params.push(inputs[i].value(context));
+      params.push(inputFuncs[i](context));
     }
 
     // apply arguments instead of spreading for performance.
