@@ -1,4 +1,4 @@
-import recomputed, { property, props, state, shallow, deep } from '../src/index';
+import recomputed, { property, $props, $state, shallow, deep } from '../src/index';
 
 describe('recomputed', () => {
   let mockRectInstance;
@@ -17,7 +17,7 @@ describe('recomputed', () => {
 
     const composer = recomputed(mockRectInstance);
 
-    computedData = composer(props('list'), state('start'), state(instState => instState.end), (list, start, end) => {
+    computedData = composer($props('list'), $state('start'), $state(instState => instState.end), (list, start, end) => {
       return list.slice(start, end).map((item, index) => ({
         id: index,
         data: item,
@@ -132,7 +132,7 @@ describe('decorator', () => {
   });
 
   test('should memorized by reference (should cached)', () => {
-    const selectedItem = composer(property('list'), state('selectedId'), (list, selectedId) => {
+    const selectedItem = composer(property('list'), $state('selectedId'), (list, selectedId) => {
       return list.find(item => item.id === selectedId).data;
     });
     const previous = selectedItem();
@@ -145,7 +145,7 @@ describe('decorator', () => {
   });
 
   test('should memorized by reference (should not cached)', () => {
-    const selectedItem = composer(property('list'), state('selectedId'), (list, selectedId) => {
+    const selectedItem = composer(property('list'), $state('selectedId'), (list, selectedId) => {
       return list.find(item => item.id === selectedId).data;
     });
     const previous = selectedItem();
@@ -160,7 +160,7 @@ describe('decorator', () => {
   test('should memorized by shallow (should cached)', () => {
     const selectedItem = composer(
       shallow(property('list')),
-      state('selectedId'),
+      $state('selectedId'),
       (list, selectedId) => {
         return list.find(item => item.id === selectedId).data;
       }
@@ -177,14 +177,14 @@ describe('decorator', () => {
   test('should not memorized by shallow but memorized by deep', () => {
     const shallowSelectedItem = composer(
       shallow(property('list')),
-      state('selectedId'),
+      $state('selectedId'),
       (list, selectedId) => {
         return list.find(item => item.id === selectedId).data;
       }
     );
     const deepSelectedItem = composer(
       deep(property('list')),
-      state('selectedId'),
+      $state('selectedId'),
       (list, selectedId) => {
         return list.find(item => item.id === selectedId).data;
       }

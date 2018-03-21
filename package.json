@@ -1,6 +1,6 @@
 {
   "name": "recomputed",
-  "version": "1.0.1-beta.2",
+  "version": "1.0.1-beta.3",
   "main": "lib/recomputed.js",
   "jsnext:main": "es/recomputed.js",
   "module": "es/recomputed.js",
