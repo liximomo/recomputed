@@ -62,7 +62,6 @@ class Computable extends InputInterface {
     const length = inputFuncs.length;
 
     for (let i = 0; i < length; i++) {
-      // apply arguments instead of spreading and mutate a local list of params for performance.
       params.push(inputFuncs[i](context));
     }
 
