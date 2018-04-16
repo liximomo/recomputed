@@ -1,7 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
-import replace from 'rollup-plugin-replace'
+import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
@@ -11,7 +11,9 @@ const onwarn = function(warning) {
   // Skip certain warnings
 
   // should intercept ... but doesn't in some rollup versions
-  if ( warning.code === 'THIS_IS_UNDEFINED' ) { return; }
+  if (warning.code === 'THIS_IS_UNDEFINED') {
+    return;
+  }
 
   // console.warn everything else
   console.log('\x1b[33m(!) %s\x1b[0m', warning.message || warning);
@@ -23,10 +25,9 @@ const plugins = [
   commonjs(), // so Rollup can convert commonjs to an ES module
   babel({
     exclude: ['node_modules/**'],
-    plugins: ["external-helpers"]
+    plugins: ['external-helpers'],
   }),
 ];
-
 
 // browser-friendly UMD build
 const umd = {
@@ -37,7 +38,7 @@ const umd = {
     name: 'recomputed',
   },
   onwarn,
-  plugins
+  plugins,
 };
 
 // CommonJS (for Node) and ES module (for bundlers) build.
@@ -50,8 +51,7 @@ const jsmodule = {
   output: [{ file: pkg.main, format: 'cjs' }, { file: pkg.module, format: 'es' }],
   onwarn,
   plugins,
-  external: ['reselect'],
-}
+};
 
 if (process.env.NODE_ENV === 'development') {
   // nothing current
@@ -72,12 +72,9 @@ if (process.env.NODE_ENV === 'development') {
         // https://github.com/facebookincubator/create-react-app/issues/2488
         ascii_only: true,
       },
-    })
-  ]
+    }),
+  ];
   umd.plugins = umd.plugins.concat(prodPlugins);
 }
 
-export default [
-  umd,
-  jsmodule
-];
+export default [umd, jsmodule];
