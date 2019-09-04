@@ -5,6 +5,7 @@
   "jsnext:main": "es/recomputed.js",
   "module": "es/recomputed.js",
   "browser": "dist/recomputed.js",
+  "typings": "types/index.d.ts",
   "author": "liximoom",
   "homepage": "https://github.com/liximomo/recomputed/blob/master/README.md",
   "repository": {
@@ -28,7 +29,9 @@
     "build": "npm run build:js",
     "build:js": "NODE_ENV=production rollup -c",
     "lint": "eslint src/**/*.js",
-    "test": "NODE_ENV=test jest"
+    "test": "npm-run-all --parallel test:*",
+    "test:unit": "NODE_ENV=test jest",
+    "test:type": "typings-tester --dir types_test"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -46,7 +49,9 @@
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^2.0.1"
+    "rollup-plugin-uglify": "^2.0.1",
+    "typescript": "^3.6.2",
+    "typings-tester": "^0.3.2"
   },
   "jest": {
     "verbose": true,

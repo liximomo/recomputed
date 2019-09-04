@@ -48,7 +48,10 @@ const umd = {
 // the `targets` option which can specify `dest` and `format`)
 const jsmodule = {
   input,
-  output: [{ file: pkg.main, format: 'cjs' }, { file: pkg.module, format: 'es' }],
+  output: [
+    { file: pkg.main, format: 'cjs' },
+    { file: pkg.module, format: 'es' },
+  ],
   onwarn,
   plugins,
 };

@@ -1,12 +1,11 @@
-import propertyGetterCreator from '../core/propertyGetterCreator';
-import Input from '../core/Input';
+import { propertyGetterCreator } from '../core';
 
 export function props(propertyNameOrFunc) {
   const getter = propertyGetterCreator(propertyNameOrFunc);
-  return Input.from(ctx => getter(ctx.props));
+  return ctx => getter(ctx.props);
 }
 
 export function state(propertyNameOrFunc) {
   const getter = propertyGetterCreator(propertyNameOrFunc);
-  return Input.from(ctx => getter(ctx.state));
+  return ctx => getter(ctx.state);
 }

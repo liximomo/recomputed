@@ -1,16 +1,21 @@
+/**
+ * Create a function that return the speicific property from the first argument
+ *
+ * @export
+ * @param {(string|((ctx?) => any))} propertyNameOrFunc
+ * @returns
+ */
 export default function propertyGetterCreator(propertyNameOrFunc) {
   const type = typeof propertyNameOrFunc;
   if (type === 'string') {
-    return function (obj) {
-      return obj[propertyNameOrFunc];
+    return function(ctx) {
+      return ctx[propertyNameOrFunc];
     };
   } else if (type === 'function') {
-    return function (obj) {
-      return propertyNameOrFunc(obj);
+    return function(ctx) {
+      return propertyNameOrFunc(ctx);
     };
   } else {
-    throw new Error(
-      'expect input to be function or string, ' + `instead received type: [${type}]`
-    );
+    throw new Error(`expect a function or string, got type: "${type}"`);
   }
 }

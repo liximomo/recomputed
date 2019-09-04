@@ -1,4 +1,4 @@
-import identityEqual from '../utils/identityEqual';
+import { identityEqual } from '../utils';
 
 function areArgumentsEqual(equalityCheck, prev, next) {
   if (prev === null || next === null || prev.length !== next.length) {
@@ -20,14 +20,13 @@ export default function memoize(func) {
   let lastArgs = null;
   let lastResult = null;
 
-  return function() {
-    // we reference arguments instead of spreading them for performance reasons
-    if (!areArgumentsEqual(identityEqual, lastArgs, arguments)) {
+  return function(...currentArgs) {
+    if (!areArgumentsEqual(identityEqual, lastArgs, currentArgs)) {
       // apply arguments instead of spreading for performance.
-      lastResult = func.apply(this, arguments);
+      lastResult = func.apply(this, currentArgs);
     }
 
-    lastArgs = arguments;
+    lastArgs = currentArgs;
     return lastResult;
   };
 }

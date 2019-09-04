@@ -1,4 +1,4 @@
-import ReferenceInput from '../core/ReferenceInput';
-import shallowEqual from '../utils/shallowEqual';
+import { createDep } from '../core';
+import { shallowEqual } from '../utils';
 
-export default input => ReferenceInput.from(input, shallowEqual);
+export default input => createDep(input, shallowEqual);
